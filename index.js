@@ -7,19 +7,21 @@ const graphContainer = document.getElementById("graph-container");
 const gitgraph = createGitgraph(graphContainer);
 
 // Simulate git commands with Gitgraph API.
-const master = gitgraph.branch("master");
-master.commit("Initial commit");
+const master = gitgraph.branch('master');
+master.commit('Initial commit');
+master.commit('One');
 
-const develop = gitgraph.branch("develop");
-develop.commit("Add TypeScript");
+const featureBranch = gitgraph.branch('feature/ATT-1234');
+featureBranch.commit('New feature added');
+featureBranch.commit('Second commit for feature');
 
-const aFeature = gitgraph.branch("a-feature");
-aFeature
-    .commit("Make it work")
-    .commit("Make it right")
-    .commit("Make it fast");
+master.checkout();
+const bugFixBranch = gitgraph.branch('bugfix/ATT-2051');
+bugFixBranch.commit('Fixing some bug');
+bugFixBranch.commit('Another commit fixing bug');
 
-develop.merge(aFeature);
-develop.commit("Prepare v1");
+featureBranch.merge(master);
+master.merge(featureBranch);
 
-master.merge(develop).tag("v1.0.0");
+bugFixBranch.merge(master);
+master.merge(bugFixBranch);
