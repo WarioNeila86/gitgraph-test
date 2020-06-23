@@ -1,11 +1,20 @@
-import { createGitgraph, TemplateName } from '@gitgraph/js';
+import { createGitgraph, TemplateName, templateExtend } from '@gitgraph/js';
 
 // Get the graph container HTML element.
 const graphContainer = document.getElementById('graph-container');
 
+// Extending template to adjust some options
+const template = templateExtend(TemplateName.Metro, {
+    commit: {
+        message: {
+            displayHash: false
+        }
+    }
+});
+
 // Instantiate the graph.
 const gitgraph = createGitgraph(graphContainer, {
-    template: TemplateName.Metro,
+    template,
     author: 'Ryanair Automation <auto@ryanair.ie>',
     elementId: 'graph-container',
     branchLabelOnEveryCommit: true,
