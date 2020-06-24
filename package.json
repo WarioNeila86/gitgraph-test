@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
+    "start-pod": "parcel pod.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
