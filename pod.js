@@ -9,14 +9,14 @@ const template = templateExtend(TemplateName.Metro, {
         message: {
             displayHash: false
         }
-    }
+    },
+    colors: ['#999999', '#009933', '#ffcc00', '#3366ff']
 });
 
 // Instantiate the graph.
 const gitgraph = createGitgraph(graphContainer, {
     template,
     author: 'Ryanair Automation <auto@ryanair.ie>',
-    elementId: 'graph-container',
     branchLabelOnEveryCommit: true,
     mode: 'extended' // or compact if you don't want the commit messages
 });
@@ -24,52 +24,48 @@ const gitgraph = createGitgraph(graphContainer, {
 // Simulate some commits in master
 const master = gitgraph.branch('master');
 master
-    .commit('Initial commit')
-    .commit('Second commit to master')
-    .commit('Third commit to master');
+    .commit('Initial commit on master')
+    .commit('More changes on master')
+    .commit('Yet more changes on master');
 
 
 // Create POD branch with some commits
-const podBranch = master.branch('dragonflies/awesome_feature');
+const podBranch = master.branch('dragonflies/new_feature');
 
-// Make some changes in feature branch
+// Make some changes in POD branch
 podBranch
-    .commit('Initial commit for awesome changes')
-    .commit('Second commit for awesome changes');
+    .commit('Initial commit on POD branch');
     
-// Create feature branch with some commits
+// Create feature branch from POD branch
 const featureBranch = podBranch.branch('feature/ATT-1234');
 
 // Make some changes in feature branch
 featureBranch
-    .commit('New feature added')
-    .commit('Second commit for feature');
+    .commit('ATT-1234 New feature added')
+    .commit('ATT-1234 Second commit for feature');
 
 // Make more changes in master
-// master.commit('Fourth commit to master');
+master.commit('And more changes on master');
 
-// Create second feature branch with some commits
+// Create second feature branch from POD branch
 const featureBranch2 = podBranch.branch('feature/ATT-5678');
 
-// Make some changes in feature branch
+// Make some changes in second feature branch
 featureBranch2
-    .commit('Another feature added')
-    .commit('Second commit for second feature');
+    .commit('ATT-5678 Another feature added')
+    .commit('ATT-5678 Second commit for second feature');
 
-// Sync pod branch with master
+// Sync POD branch with master
 podBranch.merge(master);
 
-// Make more changes in pod branch
-podBranch.commit('Third commit for feature');
-
-// Sync feature branch with pod and merge
+// Sync feature branch with POD and merge
 featureBranch.merge(podBranch);
 podBranch.merge(featureBranch);
 
-// Sync second feature branch with pod and merge
+// Sync second feature branch with POD and merge
 featureBranch2.merge(podBranch);
 podBranch.merge(featureBranch2);
 
-// Sync pod branch with master and merge
+// Sync POD branch with master and merge
 podBranch.merge(master);
 master.merge(podBranch);
