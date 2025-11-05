@@ -2,16 +2,17 @@
   "name": "gitgraph",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
-    "start-pod": "parcel pod.html",
+    "start": "parcel serve index.html",
+    "start-pod": "parcel serve pod.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@gitgraph/js": "^1.4.0",
-    "parcel-bundler": "^1.12.4"
+    "@gitgraph/js": "^1.4.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.1"
   }
 }
